@@ -23,8 +23,20 @@ public class Dispersion {
 		}
 	}
 	
-	public String tLlaves(int numero, int primo){
-		return " --";
+	public String tLlaves(int numero, int primo, int arreglo){
+		if(isPrimo(arreglo)){
+			if(primo>2){
+				String cam=Integer.toString(numero, primo);
+				String bin="";
+				for(int i=0;i<cam.length();i++){
+					bin+=Integer.toBinaryString(Integer.parseInt(cam.charAt(i)+"", primo));
+				}
+				int i=Integer.parseInt(bin,2);
+				return (i%arreglo)+"";
+			}
+			return "La base debe ser mayor a 2";
+		}
+		return "El arreglo debe de ser primo";
 	}
 	
 	public String plegamiento(int numero, int separacion){

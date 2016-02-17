@@ -23,10 +23,12 @@ public class PantallaEntrada extends JFrame implements ActionListener{
 	private JPanel contentPane;
 	private JTextField txtNumero;
 	private JTextField txtDato;
+	private JTextField txtDatoDos;
 	
 	private JLabel lblNumero;
 	private JLabel lblCodigoDeDispersion;
 	private JLabel lblDatoAuxiliar;
+	private JLabel lblArreglo;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -46,7 +48,7 @@ public class PantallaEntrada extends JFrame implements ActionListener{
 		dispersion=new Dispersion();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 453, 231);
+		setBounds(100, 100, 453, 280);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -56,6 +58,15 @@ public class PantallaEntrada extends JFrame implements ActionListener{
 		txtNumero.setBounds(144, 25, 288, 24);
 		contentPane.add(txtNumero);
 		txtNumero.setColumns(10);
+		
+		txtDatoDos=new JTextField();
+		txtDatoDos.setBounds(144, 200, 288, 24);
+		contentPane.add(txtDatoDos);
+		txtDatoDos.setColumns(10);
+		
+		lblArreglo=new JLabel("Arreglo0: ");
+		lblArreglo.setBounds(12, 200, 116,15);
+		contentPane.add(lblArreglo);
 		
 		lblNumero = new JLabel("Numero:");
 		lblNumero.setBounds(12, 29, 70, 15);
@@ -113,7 +124,7 @@ public class PantallaEntrada extends JFrame implements ActionListener{
 				r+=dispersion.division(Integer.parseInt(txtNumero.getText()),Integer.parseInt(txtDato.getText()));
 				break;
 			case "t":
-				r+=dispersion.tLlaves(Integer.parseInt(txtNumero.getText()),Integer.parseInt(txtDato.getText()));
+				r+=dispersion.tLlaves(Integer.parseInt(txtNumero.getText()),Integer.parseInt(txtDato.getText()), Integer.parseInt(txtDatoDos.getText()));
 				break;
 		}
 		lblCodigoDeDispersion.setText(r);
