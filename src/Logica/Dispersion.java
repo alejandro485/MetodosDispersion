@@ -8,6 +8,9 @@ public class Dispersion {
 			return "No se puede operar";
 		}
 		String bin=Integer.toBinaryString(d);
+		if(bin.length()<bits){
+			return "No se puede operar";
+		}
 		int l1=((bin.length()-bits+1)/2);
 		int l2=((bin.length()+bits+1)/2);
 		bin=bin.substring(l1, l2);
@@ -15,7 +18,7 @@ public class Dispersion {
 	}
 	
 	public String division(int numero, int primo){
-		if(isPrimo(primo)){
+		if(primo>1 || isPrimo(primo)){
 			return (numero%primo)+"";
 		}
 		else{
@@ -40,22 +43,31 @@ public class Dispersion {
 	}
 	
 	public String plegamiento(int numero, int separacion){
-		String bin=Integer.toBinaryString(numero);
-		String sum="";
-		for(int i=0; i<separacion;i++){
-			sum+="0";
+		if(separacion<8){
+			String bin=Integer.toBinaryString(numero);
+			System.out.println(bin);
+			String sum="";
+			for(int i=0; i<separacion;i++){
+				sum+="0";
+			}
+			System.out.println("Suma inicial: "+sum);
+			String ayuda="";
+			while(bin.length()>=separacion){
+				ayuda=bin.substring(bin.length()-separacion, bin.length());
+				System.out.println("Valor a sumar: "+ayuda);
+				sum=suma(sum, ayuda);
+				System.out.println("Suma actual: "+sum);
+				bin=bin.substring(0, bin.length()-separacion);
+			}
+			for(int i=bin.length(); i<separacion;i++){
+				bin="0"+bin;
+			}
+			System.out.println("Valor a sumar: "+bin);
+			sum=suma(sum, bin);
+			System.out.println("Suma final: "+sum);
+			return Integer.parseInt(sum,2)+"";
 		}
-		String ayuda="";
-		while(bin.length()>=separacion){
-			ayuda=bin.substring(bin.length()-separacion, bin.length());
-			sum=suma(sum, ayuda);
-			bin=bin.substring(0, bin.length()-separacion);
-		}
-		for(int i=bin.length(); i<separacion;i++){
-			bin="0"+bin;
-		}
-		sum=suma(sum, bin);
-		return Integer.parseInt(sum,2)+"";
+		return "Digite una separacion menor";
 	}
 	
 	private boolean isPrimo(int num){
